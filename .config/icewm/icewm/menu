@@ -1,0 +1,11 @@
+# This is an example for IceWM's menu definition file.
+#
+# Place your variants in /etc/X11/icewm or in $HOME/.icewm
+# since modifications to this file will be discarded when you
+# (re)install icewm.
+#
+prog Terminal ! x-terminal-emulator -ls
+prog "Web Browser" ! x-www-browser
+includeprog icewm-menu-fdo --seps -d1400 -D1650 -S --limit-max-len=42
+menuprog Monitors ../devices/computer icewm-menu-xrandr
+menufile Tool_bar folder toolbar

@@ -1,0 +1,311 @@
+# i3 config file (v4)
+
+# Establecemos que la tecla principal para trabajar con i3 sea la de Windows
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango: Ubuntu 10
+
+# Startups del WM
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id feh --bg-scale /home/carlos/Imágenes/wallpaper2.jpg
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+exec --no-startup-id volumeicon
+#exec --no-startup-id xfsettingsd
+exec --no-startup-id picom --backend glx -b
+exec --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id python ~/.config/i3/workspace.py
+
+
+bindsym Ctrl+Mod1+Right workspace next
+bindsym Ctrl+Mod1+Left workspace prev
+
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Al tener como mínimo 2 ventanas abiertas presionamos la tecla Windows, Posicionamos el ratón en uno de los bordes de la ventana, presionamos el botón derecho del ratón y lo arrastramos para modificar el tamaños de las ventanas
+floating_modifier $mod
+
+# move tiling windows via drag & drop by left-clicking into the title bar,
+# or left-clicking anywhere into the window while holding the floating modifier.
+tiling_drag modifier titlebar
+
+# Shortcuts Volumen
+bindsym Ctrl+Up exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym Ctrl+Down  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym Ctrl+M exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+
+# Abrir Terminal
+bindsym $mod+Return exec alacritty
+bindsym Ctrl+mod1+T exec alacritty
+
+# La combinación de teclas para cerrar una ventana activa es windows+shift+q
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id dmenu_run
+
+# Definimos el tema y los atajos de teclado para el funcionamiento de Rofi. Si cuando Rofi está abierto presionamos Shift+cursores derecha e izquierda obtendremos funcionalidades adicionales.
+set $rofi_theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+bindsym Ctrl+space exec rofi -show drun -config $rofi_theme -icon-theme "Papirus-Dark" -show-icons -font "System San Francisco Display 15"
+bindsym Ctrl+Shift+space exec rofi -show window -config $rofi_theme -show-icons
+
+# Combinación de teclas a usar para movernos entre ventanas. En mi caso uso la tecla windows+los cursores. En vez de los cursores también se pueden usar j,k,l y ñ
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Para mover la ventana seleccionada arriba, abajo izquierda o derecha presionando la tecla Win+Shift+cursores. En vez de los cursores también se pueden usar j,k,l y ñ
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Para definir que la siguiente ventana que abramos lo haga abajo o al lado de la actual que tenemos activa. Si os fijáis bien veréis un marco de color verde que indicará la posición donde se ubicará la nueva ventana
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Para poner la ventana seleccionada a pantalla completa presionar Win+f
+bindsym $mod+f fullscreen toggle
+
+# Para hacer que las ventanas se dispongan/abran en modo tiling, pestaña o apiladas. La opción predeterminada es el modo tiling
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Para transformar una ventana de anclada a flotante y viceversa
+bindsym $mod+Shift+space floating toggle
+
+# Si la ventana activa actual está en modo tiling y queremos que la ventana activa sea una ventana flotante deberemos presionar Win+Espacio
+bindsym $mod+space focus mode_toggle
+
+# La tecla Win+a sirve para agrupar ventanas. Una vez agrupadas podremos insertar nuevas ventanas en la posición que exactamente necesitemos.
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Dar un nombre a los distintos espacios de trabajo o escritorios virtuales
+set $workspace1 "  "
+set $workspace2 " 󰨞 "
+set $workspace3 "  "
+set $workspace4 " 󰈹 "
+set $workspace5 "  "
+set $workspace6 "  "
+set $workspace7 "  "
+set $workspace8 " 󰝚 " 
+set $workspace9 "  "
+set $workspace10  " "
+
+# Para irse a un espacio de trabajo determinado tecla Win + Número de espacio que queremos ir
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# Irse a un espacio de trabajo determinado usando el teclado numérico
+bindsym $mod+Mod2+KP_1 workspace $workspace1
+bindsym $mod+Mod2+KP_2 workspace $workspace2
+bindsym $mod+Mod2+KP_3 workspace $workspace3
+bindsym $mod+Mod2+KP_4 workspace $workspace4
+bindsym $mod+Mod2+KP_5 workspace $workspace5
+bindsym $mod+Mod2+KP_6 workspace $workspace6
+bindsym $mod+Mod2+KP_7 workspace $workspace7
+#bindsym $mod+Mod2+KP_8 workspace $workspace8
+#bindsym $mod+Mod2+KP_9 workspace $workspace9
+#bindsym $mod+Mod2+KP_0 workspace $workspace10
+
+# Para mover una ventana activa al espacio de trabajo que queremos. Win+Shift+Número_de_espacio_de_trabajo
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# Para mover una ventana activa al espacio de trabajo que queremos con el teclado numérico. Win+Shift+Número_de_espacio_de_trabajo
+bindsym $mod+Shift+Mod2+KP_End move container to workspace $workspace1
+bindsym $mod+Shift+Mod2+KP_Down move container to workspace $workspace2
+bindsym $mod+Shift+Mod2+KP_Next move container to workspace $workspace3
+bindsym $mod+Shift+Mod2+KP_Left move container to workspace $workspace4
+bindsym $mod+Shift+Mod2+KP_Begin move container to workspace $workspace5
+bindsym $mod+Shift+Mod2+KP_Right move container to workspace $workspace6
+bindsym $mod+Shift+Mod2+KP_Home move container to workspace $workspace7
+#bindsym $mod+Shift+Mod2+KP_Up move container to workspace $workspace8
+#bindsym $mod+Shift+Mod2+KP_Prior move container to workspace $workspace9
+#bindsym $mod+Shift+Mod2+KP_Insert move container to workspace $workspace10
+
+# Para intercambiar los 2 últimos escritorios en que hemos estado
+bindsym $mod+Tab workspace back_and_forth
+
+# Workspace 1 (Files):
+assign [class="Doublecmd"] $workspace1
+assign [class="Thunar"] $workspace1
+assign [class="ONLYOFFICE Desktop Editors"] $workspace1
+
+# Workspace 2 (Code):
+assign [class="Code"] $workspace2
+#assign [class="pgadmin4"] $workspace2
+assign [class="Sublime_text"] $workspace2
+
+# Workspace 3 (Term)
+assign [class="Alacritty"] $workspace3
+assign [class="Xfce4-terminal"] $workspace3
+
+# Workspace 4 (Netw):
+assign [class="Brave-browser"] $workspace4
+assign [class="Chromium"] $workspace4
+
+# Workspace 5 (Git):
+assign [class="GitHub Desktop"] $workspace5
+
+# Workspace 6 (Utils)
+assign [class="beekeeper-studio"] $workspace6
+assign [class="Insomnia"] $workspace6
+assign [class="Zeal"] $workspace6
+assign [class="Gestor_proyectos"] $workspace6
+assign [class="Control_center"] $workspace6
+
+# Workspace 7 (DB): 
+assign [class="Zeal"] $workspace7
+assign [class="pgadmin4"] $workspace7
+assign [class="MongoDB Compass"] $workspace7
+assign [class="Heidisql"] $workspace7
+assign [class="DBeaver"] $workspace7
+
+# Workspace 8 (Media):
+assign [class="vlc"] $workspace8
+assign [class="Audacity"] $workspace8
+assign [class="Audacious"] $workspace8
+
+# Workspace 9 (OBS)
+assign [class="obs"] $workspace9
+
+# Workspace 10 (Chat): 
+assign [class="thunderbird-default"] $workspace10
+
+
+# Firefox y Chrome se abrirán en el espacio de trabajo 2
+#assign [class="Firefox ESR"] $workspace2
+#assign [class="google-chrome"] $workspace2
+
+# Atajo de teclado para recargar el archivo de configuración de i3
+bindsym $mod+Shift+c reload
+
+# Atajo de teclado para reiniciar por completo el escritorio i3. No te saca de la sesión ni pierdes ningún tipo de información.
+bindsym $mod+Shift+r restart
+
+# Atajo de teclado para cerrar completamente la sesión de i3. Una vez cerrada la sesión veremos la ventana de login de Lightdm
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Configuración para redimensionar las ventanas
+mode "resize" {
+        # Vim bindings
+        bindsym j resize shrink width 3 px or 3 ppt
+        bindsym k resize grow height 3 px or 3 ppt
+        bindsym l resize shrink height 3 px or 3 ppt
+        bindsym ntilde resize grow width 3 px or 3 ppt
+
+        # Arrow bindings
+        bindsym Left resize shrink width 3 px or 3 ppt
+        bindsym Down resize grow height 3 px or 3 ppt
+        bindsym Up resize shrink height 3 px or 3 ppt
+        bindsym Right resize grow width 3 px or 3 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Combinación de teclas para activar el modo redimensionar ventans
+bindsym $mod+r mode "resize"
+
+# Configuración de colores mostrados en pantalla
+set $bg-color             #2f343f
+set $border-focus         #5294e2
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+set $blue-color          #5DA8F4
+
+# Colores de las ventanas
+#                       Border              Background         text                 indicator
+client.focused          $border-focus       $border-focus      $text-color          #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $blue-color         $blue-color        $text-color          #00ff00
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+#bar {
+#	position top
+#	font xft: FontAwesome, FiraCode 10
+#	#status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#       # status_command ~/.config/bumblebee-status/bumblebee-status \
+#	-t onedark-powerline \
+#	-m  cpu memory layout pulseout pulsein thunderbird uptime#
+#	#-m cpu memory layout pulseout pulsein thunderbird uptime time3
+#
+#        # Bar colors
+#        colors {
+#                background $bg-color
+#                separator #757575
+#                #                  border             background         text
+#                focused_workspace  $bg-color          $bg-color          $text-color
+#                inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#                urgent_workspace   $blue-color        $blue-color        $text-color
+#        }
+#}
+
+# Quita la ventana de título y se define el grosor del borde que recubre las ventanas
+for_window [class="^.*"] border pixel 2
+
+#Hacer que se active el teclado númerico cada que que se rearranque el gestor de ventanas i3. Hay que tener instalado el paquete numlockx
+exec --no-startup-id numlockx on
+
+# Para establecer un fondo escritorio cada vez que se arranque o rearranque i3. "sudo apt install feh"
+#exec_always feh --bg-scale /home/carlos/Imágenes/image.jpg
+
+# Fijamos que la tecla imprimir pantalla sea encargada de realizar capturas de pantalla con la utilidad de XFCE. Una alternatica es usar flameshot
+bindsym Print exec --no-startup-id xfce4-screenshooter
+#bindsym Control+Print exec --no-startup-id flameshot gui
+
+# Combinación de teclas para bloquear la pantalla (Requiere el uso de Lightdm)
+bindsym $mod+shift+F2 exec dm-tool lock
+
+# Habilitar un compositor para tener transparencias y transiciones suaves. "sudo apt install compton"
+exec compton -f
+#exec compton --config /home/joan/.config/compton/compton.confexec compton --config /home/joan/.config/compton/compton.conf
+
+# Esconder la barra de i3 en el caso que lo consideremos oportuno
+bindsym $mod+m bar mode toggle
+# Para cerrar el ordenador presionar la combinación de teclas Ctrl+Alt+S
+bindsym $mod+mod1+s exec  /sbin/poweroff
+#bindsym $mod+Shift+e exec i3-msg exit

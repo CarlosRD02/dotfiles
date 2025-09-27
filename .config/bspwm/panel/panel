@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Importa las variables de color
+. "$HOME/.config/bspwm/panel/colors.sh"
+
+# Define el pipe
+PIPE=/tmp/panel_pipe
+
+# Borra la pipe si existe
+[ -p "$PIPE" ] && rm "$PIPE"
+mkfifo "$PIPE"
+
+# Formatea los módulos (secciones de la barra)
+get_bspwm_workspaces() {
+    bspc subscribe desktop_focus \
+        | while read -r line; do
+            WORKSPACES=""
+            # Aquí la lógica para bspwm:
+            # Puedes usar `bspc query -D --desktop` para obtener el estado de los escritorios
+            # y formatearlos. Por simplicidad, este ejemplo es muy básico.
+            # Deberías adaptar esto para que muestre los escritorios vacíos, ocupados, etc.
+            WORKSPACES="%{F$MOD_FG_1}%{B$MOD_BG_1}  %{F$ACCENT_COLOR}%{B$MOD_BG_1} 1 %{F$MOD_FG_1}%{B$MOD_BG_1} 2 %{F$MOD_FG_1}%{B$MOD_BG_1} 3 %{F$MOD_FG_1}%{B$MOD_BG_1} 4 "
+            echo "workspaces $WORKSPACES"
+        done &
+}
+
+# Inicia los scripts de información
+"$HOME/.config/bspwm/panel/panel_info.sh" > "$PIPE" &
+get_bspwm_workspaces &
+
+# Genera la barra
+while read -r line; do
+    # Lee cada línea de la pipe y actualiza la variable correspondiente
+    case $line in
+        workspaces*) WORKSPACES="${line#workspaces }" ;;
+        clock*) CLOCK="${line#clock }" ;;
+        battery*) BATTERY="${line#battery }" ;;
+        volume*) VOLUME="${line#volume }" ;;
+    esac
+
+    # Componer la barra con los módulos formateados
+    #  es el separador Powerline
+    left_side="%{l} ${WORKSPACES} %{F$MOD_FG_1}%{B$MOD_BG_1} "
+    right_side="%{r} %{F$MOD_FG_1}%{B$MOD_BG_1}  %{F$MOD_FG_1}%{B$MOD_BG_2} ${BATTERY} %{F$MOD_FG_2}%{B$MOD_BG_1}  %{F$MOD_FG_1}%{B$MOD_BG_2} ${VOLUME} %{F$MOD_FG_2}%{B$MOD_BG_1}  %{F$MOD_FG_1}%{B$MOD_BG_2} ${CLOCK} "
+
+    # Imprime la barra con todas las variables
+    echo "${left_side} ${right_side}" > "$PIPE"
+done < "$PIPE" \
+    | lemonbar \
+        -g 1366x24+0+0 \
+        -F "$FG_COLOR" \
+        -B "$BG_COLOR" \
+        -f "Meslo:size=10" \
+        -f "FontAwesome:size=10"

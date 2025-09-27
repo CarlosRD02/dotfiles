@@ -1,0 +1,128 @@
+#! /bin/sh
+
+# Tecla super (Windows)
+super = super
+
+# Terminal
+super + Return
+    alacritty
+
+# Aplicaciones
+super + w
+    brave-browser
+
+super + e
+    thunar
+
+super + space
+    rofi -show drun
+
+# Cerra ventana
+super + q
+    bspc node -c
+
+# Recargar bspwm
+super + Escape
+    pkill -USR1 -x bspwm
+
+# Reiniciar bspwm
+super + alt + r
+    bspc wm -r
+
+ super + 1
+     bspc desktop -f ""
+
+ super + 2
+     bspc desktop -f " 󰨞  "
+
+ super + 3
+     bspc desktop -f "   "
+
+ super + 4
+     bspc desktop -f "  "
+
+ super + 5
+     bspc desktop -f " 󰊢 "
+
+ super + 6
+     bspc desktop -f " "
+
+ super + 7
+     bspc desktop -f "  "
+
+ super + 8
+     bspc desktop -f "  "
+
+ super + 9
+     bspc desktop -f "  "
+
+# Cambiar entre ventanas
+super + {_,shift + }Tab
+    bspc node -f {next,prev}.local.!hidden.window
+
+# Movimiento focus
+super + {h,j,k,l}
+    bspc node -f {west,south,north,east}
+
+#Mover ventana
+super + shift + {h,j,k,l}
+    bspc node -v {west,south,north,east}
+
+# Layouts
+super + m
+    bspc desktop -l next
+
+super + f
+    bspc node -t ~fullscreen
+
+super + t
+    bspc node -t ~tiled
+
+super + s
+    bspc node -t ~floating
+
+# Redimensionar
+super + ctrl + {h,j,k,l}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+super + ctrl + shift + {h,j,k,l}
+    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# Workspaces
+super + {1-9,0}
+    bspc desktop -f {1-9,10}
+
+super + shift + {1-9,0}
+    bspc node -d {1-9,10}
+
+# Estado de ventana
+super + y
+    bspc node -g hidden
+
+super + alt + {h,j,k,l}
+    bspc node -s {west,south,north,east}
+
+# # Volume control
+# XF86AudioLowerVolume
+#     pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# XF86AudioRaiseVolume
+#     pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# XF86AudioMute
+#     pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# # Brightness control
+# XF86MonBrightnessUp
+#     brightnessctl set +10%
+
+# XF86MonBrightnessDown
+#     brightnessctl set 10%-
+
+# # Screenshot
+# super + p
+#     scrot -s ~/Imágenes/screenshots/%Y-%m-%d-%T-screenshot.png
+
+# # Lock screen
+# super + alt + l
+#     i3lock -c 000000

@@ -1,0 +1,119 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "padding": {
+      "top": 1,
+      "left": 2
+    },
+    "color": {
+      "1": "white",
+      "2": "red"
+    }
+  },
+  "display": {
+    "color": {
+      "title": "red"
+    },
+    "hideCursor": false,
+  //  "separator": "  "
+  },
+  "modules": [
+    "title",
+    "separator",
+    {
+      "type": "os",
+      "keyColor": "red",
+      "key": " "
+
+    },
+    {
+      "type": "host",
+      "keyColor": "red",
+      "key": " "
+ 
+    },
+    {
+      "type": "kernel",
+      "keyColor": "green",
+      "key": " "
+ 
+    },
+    {
+      "type": "uptime",
+      "keyColor": "green",
+      "key": " "
+    },
+    {
+      "type": "Packages",
+      "keyColor": "yellow",
+      "key": "📦"
+    },
+    {
+      "type": "shell",
+      "keyColor": "yellow",
+      "key": " "
+    },
+     {
+      "type": "display",
+      "keyColor": "blue",
+      "key": " "
+    },
+     {
+      "type": "DE",
+      "keyColor": "blue",
+      "key": " "
+    },
+     {
+      "type": "WM",
+      "keyColor": "red",
+      "key": " "
+    },
+
+    {
+      "type": "Theme",
+      "keyColor": "red",
+      "key": "󰉼 "
+    },
+    {
+      "type": "Icons",
+      "keyColor": "cyan",
+      "key": "󰀻 "
+    },
+
+    {
+      "type": "Font",
+      "keyColor": "cyan",
+      "key": " "
+    },
+    {
+      "type": "terminal",
+      "keyColor": "green",
+      "key": " "
+    },
+    {
+      "type": "CPU",
+      "keyColor": "green",
+      "key": " "
+    },
+    {
+      "type": "gpu",
+      "keyColor": "blue",
+      "detectionMethod": "vulkan",
+     // "showCores"
+      "key": "󰢮 "
+    },
+
+     {
+      "type": "memory",
+      "keyColor": "blue",
+      "key": " "
+    },
+    "break",
+    {
+      "type": "colors",
+      "paddingLeft": 0,
+      "symbol": "circle"
+    }
+
+  ]
+}

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Reglas para ventanas específicas
+bspc rule -a Alacritty state=floating
+bspc rule -a Pavucontrol state=floating
+bspc rule -a Blueman-manager state=floating
+bspc rule -a Gimp state=floating
+bspc rule -a Nm-connection-editor state=floating
+
+# Firefox en workspace 1
+bspc rule -a Firefox desktop='4'
+bspc rule -a Brave-brave desktop='4'
+
+# Terminal en workspace 2
+#bspc rule -a Alacritty desktop='^2'
+
+# File manager en workspace 4d
+bspc rule -a Thunar desktop='1'
+bspc rule -a Nautilus desktop='1'
+
+# Code editors en workspace 3
+bspc rule -a code desktop='󰨞'
+bspc rule -a sublime_text desktop='󰨞'
+
+# Music players en workspace 5
+bspc rule -a spotify desktop='^5'
+bspc rule -a vlc desktop='^5'
+
+# Chat apps en workspace 6
+bspc rule -a discord desktop='^6'
+bspc rule -a TelegramDesktop desktop='^6'
