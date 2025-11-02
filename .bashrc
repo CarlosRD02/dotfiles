@@ -124,7 +124,7 @@ export PATH=$PATH:$HOME/.local/bin
 alias ls='logo-ls'
 
 # bun completions
-[ -s "/home/carlos/.bun/_bun" ] && source "/home/carlos/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
