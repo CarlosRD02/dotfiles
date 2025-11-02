@@ -160,8 +160,7 @@ SPACESHIP_PACKAGE_SHOW=true
 export JAVA_HOME=/opt/jdk-21.0.2/
 export PATH=$JAVA_HOME/bin:$PATH
 
-#export LOGO_LS_FONT="Fira Code"
-
+# Alias para Logo LS
 alias ls='logo-ls'
 
 # bun completions

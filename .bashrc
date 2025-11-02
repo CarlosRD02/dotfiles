@@ -120,6 +120,7 @@ PATH=~/.console-ninja/.bin:$PATH
 
 export PATH=$PATH:$HOME/.local/bin
 
+# Alias para Logo LS
 alias ls='logo-ls'
 
 # bun completions
