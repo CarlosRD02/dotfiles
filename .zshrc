@@ -16,7 +16,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="spaceship"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -111,18 +111,30 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#############################
+#                           #
+# ! Configuraciones de Zsh  #
+#                           #
+#############################
+
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#################################
+#                               #
+# ! Configuraciones para pl10k  #
+#                               #
+#################################
 
-PATH=~/.console-ninja/.bin:$PATH
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
 
-export PATH=$PATH:$HOME/.local/bin
+####################################
+#                                  #
+# ! Configuraciones de Spaceship   #
+#                                  #
+####################################
 
 SPACESHIP_PROMPT_ORDER=(
 #  time
@@ -157,20 +169,46 @@ SPACESHIP_CHAR_SYMBOL="❯"           # símbolo del prompt
 SPACESHIP_CHAR_SUFFIX=" "           # espacio después del símbolo
 SPACESHIP_PACKAGE_SHOW=true
 
+############################
+#                          #
+# ! Variables de entorno   #
+#                          #
+############################
+
 export JAVA_HOME=/opt/jdk-21.0.2/
 export PATH=$JAVA_HOME/bin:$PATH
 
-# Alias para Logo LS
-alias ls='logo-ls'
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+export PATH=$PATH:$HOME/.local/bin
 
+#############################
+#                           #
+# ! Configuracion para bun  #
+#                           #
+#############################
 
+[ -s "/home/carlos/.bun/_bun" ] && source "/home/carlos/.bun/_bun"
+
+############################
+#                          #
+# ! Alias para la shell    #
+#                          #
+############################
+
+alias ls='logo-ls'
+alias sysupt="sudo apt update"
+alias sysupg="sudo apt upgrade"
+
+###################################
+#                                 #
+# ! Configuracion para starship   #
+#                                 #
+###################################
+
+eval "$(starship init zsh)"
