@@ -202,8 +202,21 @@ export PATH=$PATH:$HOME/.local/bin
 ############################
 
 alias ls='logo-ls'
-alias sysupt="sudo apt update"
-alias sysupg="sudo apt upgrade"
+alias update="sudo apt update"
+alias upgrade="sudo apt upgrade"
+alias gs="git status"
+alias gp="git pull"
+alias gps="git push"
+alias gc="git commit -m"
+alias ga="git add"
+alias gl="git log --oneline --graph --decorate"
+alias nrd="npm run dev"
+alias nrb="npm run build"
+alias nrt="npm run test"
+alias yarn="yarn --emoji"
+alias dj='python manage.py'
+alias alc="cd ~/.config/alacritty/"
+alias bat="cat"
 
 ###################################
 #                                 #
@@ -212,3 +225,10 @@ alias sysupg="sudo apt upgrade"
 ###################################
 
 eval "$(starship init zsh)"
+
+eval "$(zoxide init zsh)"
+
+
+
+# opencode
+export PATH=/home/carlos/.opencode/bin:$PATH
