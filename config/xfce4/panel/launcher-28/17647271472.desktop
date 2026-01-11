@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=finder
+Comment=
+Exec=xfce4-appfinder
+Icon=edit-find
+Path=
+Terminal=false
+StartupNotify=false
