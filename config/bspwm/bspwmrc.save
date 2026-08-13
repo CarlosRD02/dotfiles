@@ -9,8 +9,6 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # Gliphs Workspaces
 bspc monitor -d "  " " 󰨞  " "   " " 󰈹 " " 󰊢 " " " "  " "  "  "  "
 
-󰨞
-
 
 bspc config border_width         1
 bspc config window_gap           1

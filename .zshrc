@@ -8,6 +8,8 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+#export GTK_THEME=Nordic-darker
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -17,6 +19,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="spaceship"
 #ZSH_THEME="powerlevel10k/powerlevel10k"
+
+alias xdg-open='thunar'
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -109,6 +113,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
+ alias zshconfig="nvim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #############################
@@ -119,6 +124,7 @@ source $ZSH/oh-my-zsh.sh
 
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source "${ZSH_CUSTOM:-~/.zsh}/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
 
 #################################
 #                               #
@@ -175,17 +181,17 @@ SPACESHIP_PACKAGE_SHOW=true
 #                          #
 ############################
 
+#export JAVA_HOME=/opt/jdk8/
 export JAVA_HOME=/opt/jdk-21.0.2/
+#export JAVA_HOME=/usr/lib/jvm/java-25-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
-
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:/usr/sbin:/sbin
 
 #############################
 #                           #
@@ -193,7 +199,7 @@ export PATH=$PATH:$HOME/.local/bin
 #                           #
 #############################
 
-[ -s "/home/carlos/.bun/_bun" ] && source "/home/carlos/.bun/_bun"
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
 ############################
 #                          #
@@ -204,20 +210,18 @@ export PATH=$PATH:$HOME/.local/bin
 alias ls='logo-ls'
 alias update="sudo apt update"
 alias upgrade="sudo apt upgrade"
-alias gs="git status"
-alias gp="git pull"
-alias gps="git push"
-alias gc="git commit -m"
-alias ga="git add"
-alias gl="git log --oneline --graph --decorate"
-alias nrd="npm run dev"
-alias nrb="npm run build"
-alias nrt="npm run test"
-alias yarn="yarn --emoji"
-alias dj='python manage.py'
-alias alc="cd ~/.config/alacritty/"
-alias bat="cat"
-
+alias install="sudo apt install"
+alias remove="sudo apt remove"
+alias autoremove="sudo apt autoremove"
+alias rund="pnpm run dev"
+alias runb="pnpm run build"
+alias runt="pnpm run test"
+alias manage='python manage.py'
+alias kittyconf="nvim ~/.config/kitty/kitty.conf"
+#alias cat='bat'
+alias docker-off="systemctl stop docker.service docker.socket containerd.service"
+alias docker-on="systemctl start docker.service docker.socket containerd.service"
+alias bspwmconfig="nvim ~/.config/bspwm/bspwmrc"
 ###################################
 #                                 #
 # ! Configuracion para starship   #
@@ -228,7 +232,18 @@ eval "$(starship init zsh)"
 
 eval "$(zoxide init zsh)"
 
-
-
+##############################
+#                            #
+# ! Configuracion OpenCode   #
+#                            #
+##############################
 # opencode
-export PATH=/home/carlos/.opencode/bin:$PATH
+export PATH=~/.opencode/bin:$PATH
+
+# pnpm
+export PNPM_HOME="~/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
