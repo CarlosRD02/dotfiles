@@ -1,0 +1,48 @@
+(defwidget right []
+
+(box
+    :class "right"
+    :spacing 6
+    :space-evenly false
+
+    (box
+        :class "module ram"
+
+        (label
+            :markup {"<span color='#B7708D' font='MesloLGS Nerd Font Bold'>RAM</span> " + memory}))
+
+    (box
+        :class "module cpu"
+
+        (label
+            :markup {"<span color='#6A6577' font='MesloLGS Nerd Font Bold'>CPU</span> " + cpu}))
+
+    (box
+        :class "module vol"
+
+        (label
+            :markup {"<span color='#B09B75' font='MesloLGS Nerd Font Bold'>VOL</span> " + vol}))
+
+    (box
+        :class "module net"
+
+        (label
+            :markup {"<span color='#C0BC83' font='MesloLGS Nerd Font Bold'>NET</span> " + net}))
+
+    (button
+        :class "module clock"
+        :onclick "bash ~/.config/eww/scripts/clock-toggle.sh"
+
+        (label
+            :halign "center"
+            :markup {clock}))
+
+    (button
+        :class "module sysmenu-btn"
+        :onclick "bash ~/.config/eww/scripts/sysmenu-toggle.sh"
+
+        (label
+            :class "sysmenu-btn-icon"
+            :markup "<span font='MesloLGS Nerd Font'>&#xE690;</span>"))
+)
+)

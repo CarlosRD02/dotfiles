@@ -1,0 +1,109 @@
+;; Widget de control del reproductor de música (playerctl).
+;; Popup con vinilo decorativo, titulo, barra de tiempo y play/pausa,
+;; siguiente, anterior y stop.
+(defwidget music-widget []
+  (box :class "music"
+       :orientation "h"
+       :spacing 25
+       :space-evenly false
+
+    ;; Vinilo decorativo a la izquierda (CSS puro: circulo negro con
+    ;; surcos concentricos, etiqueta central y agujero)
+    (box :class "music-vinyl"
+         :valign "center"
+         :halign "start"
+         :hexpand false
+         :vexpand false
+      (box :class "music-vinyl-label"
+           :valign "center"
+           :halign "center"
+        (box :class "music-vinyl-hole")))
+
+    ;; Columna derecha: todo el contenido de control
+    (box :class "music-body"
+         :orientation "v"
+         :spacing 10
+         :space-evenly false
+         :valign "center"
+         :halign "start"
+         :hexpand false
+
+      ;; Titulo de la cancion (hasta 28 caracteres)
+      (label :class "music-title"
+             :halign "center"
+             :valign "center"
+             :text {music-title})
+
+      ;; Barra de tiempo: transcurrido, progreso, total
+      ;; (eww 0.6 no repinta los scale con la var; el gradient si.
+      ;;  La "bolita" se pinta en el gradient como segmento de 12px)
+      (box :class "music-time"
+           :orientation "h"
+           :spacing 8
+           :space-evenly false
+        (label :class "music-time-label"
+               :hexpand false
+               :text {music-time-elapsed})
+        (box :class "music-progress"
+             :hexpand false
+             :vexpand false
+             :valign "center"
+          (box :class "music-progress-fill"
+               :style {"background: linear-gradient(to right, #C0BC83 0%, #C0BC83 " + (music-time-frac * 100 - 3) + "%, #C0B383 " + (music-time-frac * 100 - 3) + "%, #C0B383 " + (music-time-frac * 100 + 3) + "%, #2E2D2D " + (music-time-frac * 100 + 3) + "%, #2E2D2D 100%);"}))
+        (label :class "music-time-label"
+               :hexpand false
+               :text {music-time-total}))
+
+      ;; Control de volumen del reproductor
+      (box :class "music-volume"
+           :orientation "h"
+           :spacing 8
+           :space-evenly false
+           :valign "center"
+        (label :class "music-volume-icon"
+               :markup "<span font='FontAwesome'>&#xF028;</span>")
+        (scale :class "music-volume-slider"
+               :orientation "h"
+               :hexpand false
+               :min 0
+               :max 100
+               :value {music-volume}
+               :onchange "bash ~/.config/eww/scripts/music-volume.sh set {}")
+        (label :class "music-volume-pct"
+               :text {music-volume + "%"}))
+
+      ;; Fila principal: anterior, play/pausa, siguiente, stop
+      (box :orientation "h"
+           :spacing 10
+           :halign "center"
+           :space-evenly false
+        (button :class "music-btn-circle"
+                :onclick "playerctl previous"
+          (label :class "music-glyph"
+                 :markup "<span font='FontAwesome'>&#xF048;</span>"))
+        (button :class "music-btn-circle music-btn-main"
+                :onclick "playerctl play-pause"
+          (label :class "music-glyph"
+                 :markup {"<span font='FontAwesome'>" + (music-status == "Playing" ? "&#xF04C;" : "&#xF04B;") + "</span>"}))
+        (button :class "music-btn-circle"
+                :onclick "playerctl next"
+          (label :class "music-glyph"
+                 :markup "<span font='FontAwesome'>&#xF051;</span>"))
+        (button :class "music-btn-circle"
+                :onclick "playerctl stop"
+          (label :class "music-glyph"
+                 :markup "<span font='FontAwesome'>&#xF04D;</span>"))))))
+
+;; Overlay transparente que captura el click fuera del popup y lo cierra
+;; (misma tecnica que sysmenu-overlay: eww 0.6 no tiene focus-out nativo).
+(defwidget music-overlay-widget []
+  (box :class "music-overlay"
+       :orientation "v"
+       :hexpand true
+       :vexpand true
+    (button :class "music-overlay"
+            :onclick "eww close music; eww close music-overlay"
+            :halign "fill"
+            :valign "fill"
+            :hexpand true
+            :vexpand true)))

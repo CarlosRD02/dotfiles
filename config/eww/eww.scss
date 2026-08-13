@@ -1,0 +1,622 @@
+.bar {
+  background-color: rgba(0, 0, 0, 0);
+  color: #ffffff;
+  font-family: "Iosevka Nerd Font";
+  font-size: 12px;
+}
+
+.bar-left {
+  padding-left: 5px;
+}
+
+.bar-left .sep {
+  color: #C0BC83;
+  margin-left: 10px;
+  font-family: "MesloLGS Nerd Font Bold";
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.center {
+  margin-left: 8px;
+  background-color: #C0BC83;
+  background-image: none;
+  border-radius: 6px;
+  padding: 2px 12px;
+  color: #000000;
+  box-shadow: none;
+}
+
+.module.ram,
+.module.cpu,
+.module.vol,
+.module.clock,
+.module.net,
+  .sysmenu-btn {
+  background-color: #1c1824;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #C0BDC5;
+  border-radius: 6px;
+  padding: 0 8px;
+  color: #C0BDC5;
+}
+
+  .bar-right {
+  padding-right: 5px;
+}
+
+.sysmenu-btn {
+  background-image: none;
+  box-shadow: none;
+  color: #C0BC83;
+  font-family: "MesloLGS Nerd Font";
+  font-size: 13px;
+}
+
+.sysmenu-btn-icon {
+  margin-left: -3px;
+  margin-right: -1px;
+}
+
+.sysmenu-btn:hover {
+  background-color: #1c1824;
+  color: #C0BDC5;
+}
+
+/* Menu del sistema (estilo GNOME, compacto) */
+.sysmenu {
+  background-color: #1c1824;
+  background-image: none;
+  border-width: 2px;
+  border-style: solid;
+  // border-color: #C0BDC5;
+  border-radius: 12px;
+  padding: 8px;
+  color: #C0BDC5;
+  box-shadow: none;
+  min-width: 280px;
+  min-height: 330px;
+}
+
+
+/* Header: lighter background, rounded corners */
+.sysmenu-header {
+  background-color: #2e2936;
+  background-image: none;
+  border: none;
+  border-radius: 14px;
+  padding: 0;
+  box-shadow: none;
+  min-height: 60px;
+  margin-bottom: 4px;
+}
+
+.sysmenu-avatar {
+  background-color: #3a3841;
+  background-image: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #C0B383;
+  border-radius: 9999px;
+  margin-left: 10px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0px;
+  color: #C0BC83;
+  font-family: FontAwesome;
+  font-size: 18px;
+}
+
+.sysmenu-user {
+  font-family: "Ubuntu Regular";
+  font-size: 13px;
+  font-weight: bold;
+  color: #C0BDC5;
+}
+
+.sysmenu-uptime {
+  font-family: "Ubuntu Regular";
+  font-size: 11px;
+  color: #C0BDC5;
+}
+
+/* Power button: circle like avatar, smaller */
+.sysmenu-pwr-item {
+  background-color: #3a3841;
+  background-image: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #C0B383;
+  border-radius: 9999px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 5px;
+  color: #C0BC83;
+  font-family: FontAwesome;
+  font-size: 11px;
+  box-shadow: none;
+}
+
+.sysmenu-pwr-item:hover {
+  background-color: #e06c75;
+  border-color: #e06c75;
+  color: #1c1824;
+}
+
+.sysmenu-row {
+  background-color: rgba(0, 0, 0, 0);
+  background-image: none;
+  border: none;
+  border-radius: 8px;
+  padding: 1px 0px;
+  box-shadow: none;
+  color: #C0BDC5;
+  font-size: 12px;
+  min-width: 0px;
+}
+
+.sysmenu-row:hover {
+  background-color: #2e2d2d;
+}
+
+/* Panel de temperaturas: estilos propios, igual que el header */
+.sysmenu-temps {
+  background-color: #2e2936;
+  background-image: none;
+  border: none;
+  border-radius: 14px;
+  padding: 0 10px;
+  box-shadow: none;
+  min-height: 60px;
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+
+.sysmenu-temps:hover {
+  background-color: #2e2936;
+}
+
+/* Panel de energia del CPU y de Red/Bluetooth: estilos propios, igual que el header */
+.sysmenu-cpu-gov,
+.sysmenu-net {
+  background-color: #2e2936;
+  background-image: none;
+  border: none;
+  border-radius: 14px;
+  padding: 0 10px;
+  box-shadow: none;
+  min-height: 60px;
+  margin-top: 0px;
+  margin-bottom: 8px;
+  min-width: 140px;
+}
+
+/* El panel de red tiene solo 2 botones: no necesita 140px */
+.sysmenu-net {
+  min-width: 84px;
+}
+
+/* Sliders de brillo (decorativo) y volumen */
+.sysmenu-sliders {
+  background-color: #1c1824;
+  background-image: none;
+  border: none;
+  border-radius: 14px;
+  padding: 8px 10px;
+  box-shadow: none;
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+
+.sysmenu-slider-label {
+  color: #C0BC83;
+  font-size: 12px;
+}
+
+.sysmenu-slider {
+  min-width: 118px;
+}
+
+.sysmenu-slider trough {
+  background-color: #3a3841;
+  border-radius: 4px;
+  min-height: 6px;
+}
+
+.sysmenu-slider highlight {
+  background-color: #C0BC83;
+  border-radius: 4px;
+}
+
+.sysmenu-slider slider {
+  background-color: #C0BC83;
+  border-radius: 9999px;
+  min-width: 14px;
+  min-height: 14px;
+}
+
+.sysmenu-slider slider:hover {
+  background-color: #C0B383;
+}
+
+/* Botones cuadrados: ajustes y wallpaper */
+.sysmenu-header-panel {
+  background-color: #2e2936;
+  background-image: none;
+  border: none;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: none;
+}
+
+.sysmenu-square-btn {
+  background-color: #2e2936;
+  background-image: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #C0BC83;
+  border-radius: 10px;
+  min-height: 25px;
+  box-shadow: none;
+}
+
+.sysmenu-square-btn:hover {
+  background-color: #2e2936;
+  border-color: #C0B383;
+}
+
+.sysmenu-square-glyph {
+  color: #C0BC83;
+  font-family: FontAwesome;
+  font-size: 18px;
+}
+
+/* Popup de energia: grid de iconos, sobrescribe el min-size de .sysmenu */
+.sysmenu-power {
+  min-width: 300px;
+  min-height: 0px;
+}
+
+.sysmenu-pwr-grid {
+  background-color: #2e2936;
+  background-image: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #C0BC83;
+  border-radius: 14px;
+  min-height: 68px;
+  min-width: 88px;
+  padding: 4px;
+  box-shadow: none;
+}
+
+.sysmenu-pwr-grid:hover {
+  background-color: #3a3841;
+}
+
+.sysmenu-pwr-grid.sysmenu-danger {
+  border-color: #e06c75;
+}
+
+.sysmenu-pwr-grid.sysmenu-danger:hover {
+  background-color: #3a3841;
+  border-color: #e06c75;
+}
+
+.sysmenu-power-glyph {
+  color: #C0BC83;
+  font-family: FontAwesome;
+  font-size: 20px;
+}
+
+.sysmenu-power-text {
+  color: #C0BDC5;
+  font-size: 11px;
+}
+
+/* Botones de governor: mismo look que el power-btn, caja forzada con min-size */
+.cpu-gov-btn {
+  background-color: #3a3841;
+  background-image: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #C0B383;
+  border-radius: 9999px;
+  padding: 0px;
+  color: #C0BDC5;
+  font-family: FontAwesome;
+  font-size: 14px;
+  min-width: 28px;
+  min-height: 28px;
+  box-shadow: none;
+}
+
+.cpu-gov-active {
+  border-color: #C0BC83;
+  color: #C0BC83;
+}
+
+.cpu-gov-glyph {
+  color: #C0BDC5;
+}
+
+.cpu-gov-active .cpu-gov-glyph {
+  color: #C0BC83;
+}
+
+.cpu-gov-hitbox {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+  padding: 0px;
+  min-width: 0px;
+  min-height: 0px;
+}
+
+.sysmenu-row-main {
+  padding: 2px 10px 8px 10px;
+}
+
+.sysmenu-icon {
+  font-family: FontAwesome;
+  font-size: 13px;
+  color: #C0BC83;
+}
+
+.sysmenu-text {
+  font-family: "Ubuntu Regular";
+  font-size: 12px;
+}
+
+.sysmenu-val {
+  font-family: "Ubuntu Regular";
+  font-size: 11px;
+  color: #C0BDC5;
+}
+
+.sysmenu-vol-pct {
+  font-family: "Ubuntu Regular";
+  font-size: 11px;
+  color: #C0BDC5;
+  min-width: 30px;
+}
+
+.sysmenu-vol {
+  min-height: 10px;
+}
+
+.sysmenu scale trough {
+  background-color: #2e2d2d;
+  background-image: none;
+  border-radius: 4px;
+  min-height: 6px;
+}
+
+.sysmenu scale highlight {
+  background-color: #C0BC83;
+  border-radius: 4px;
+  min-height: 6px;
+}
+
+.sysmenu scale slider {
+  background-color: #C0BDC5;
+  background-image: none;
+  border-radius: 50%;
+  min-width: 12px;
+  min-height: 12px;
+}
+
+.sysmenu-danger .sysmenu-text {
+  color: #ff5555;
+}
+
+.sysmenu-danger .sysmenu-icon {
+  color: #ff5555;
+}
+
+.sysmenu-sep {
+  background-color: #2e2d2d;
+  border-radius: 1px;
+  margin: 2px 6px;
+  min-height: 1px;
+}
+
+.sysmenu-overlay {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+
+.workspaces button {
+  background-color: #1c1824;
+  background-image: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #999999;
+  box-shadow: none;
+  border-radius: 6px;
+  padding: 0;
+  min-width: 30px;
+  min-height: 18px;
+  color: #ffffff;
+}
+
+.workspaces button:hover {
+  background-color: #1c1824;
+}
+
+.workspaces .ws-active {
+  border-color: #C0BC83;
+  color: #C0BC83;
+}
+
+/* Widget de musica: boton de la barra (nota musical) */
+.music-btn {
+  background-color: #1c1824;
+  background-image: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #C0BDC5;
+  border-radius: 6px;
+  padding: 0 8px;
+  box-shadow: none;
+  color: #C0BC83;
+  font-family: FontAwesome;
+  font-size: 13px;
+}
+
+.music-btn:hover {
+  background-color: #1c1824;
+  color: #C0BDC5;
+}
+
+/* Popup del reproductor: tamano fijo (240x200), unico contenedor visible.
+   Si la caja no llena la ventana, el fondo de la ventana GTK queda asomando
+   y se ve "un contenedor dentro de otro" - por eso min-width/min-height. */
+.music {
+  background-color: #1c1824;
+  background-image: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #C0BDC5;
+  border-radius: 12px;
+  padding: 6px;
+  color: #C0BDC5;
+  box-shadow: none;
+  min-width: 220px;
+  min-height: 130px;
+}
+
+/* Titulo de la cancion en el popup */
+.music-title {
+  color: #C0BC83;
+  font-family: "Ubuntu Regular";
+  font-size: 11px;
+  font-weight: bold;
+  min-height: 14px;
+}
+
+/* Barra de tiempo y tiempos transcurrido/total.
+   Eww 0.6 no tiene progressbar: usamos un scale sin slider. */
+.music-time-label {
+  color: #C0BDC5;
+  font-family: "Ubuntu Regular";
+  font-size: 10px;
+}
+
+.music-progress {
+  min-width: 140px;
+  min-height: 3px;
+}
+
+.music-progress-fill {
+  min-width: 140px;
+  min-height: 3px;
+  border-radius: 2px;
+}
+
+/* Control de volumen del reproductor */
+.music-volume-icon {
+  color: #C0BC83;
+  font-size: 12px;
+}
+
+.music-volume-slider {
+  min-width: 140px;
+}
+
+.music-volume-slider trough {
+  background-color: #2e2d2d;
+  border-radius: 4px;
+  min-height: 6px;
+}
+
+.music-volume-slider highlight {
+  background-color: #C0BC83;
+  border-radius: 4px;
+  min-height: 6px;
+}
+
+.music-volume-slider slider {
+  background-color: #C0BC83;
+  border-radius: 9999px;
+  min-width: 12px;
+  min-height: 12px;
+}
+
+.music-volume-slider slider:hover {
+  background-color: #C0B383;
+}
+
+.music-volume-pct {
+  color: #C0BDC5;
+  font-family: "Ubuntu Regular";
+  font-size: 11px;
+  min-width: 34px;
+}
+
+/* Botones circulares de control (anterior, play/pausa, siguiente, stop) */
+.music-btn-circle {
+  background-color: #2e2936;
+  background-image: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #C0B383;
+  border-radius: 9999px;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0px;
+  color: #C0BC83;
+  font-family: FontAwesome;
+  font-size: 12px;
+  box-shadow: none;
+}
+
+.music-btn-circle:hover {
+  background-color: #C0BC83;
+  border-color: #C0BC83;
+  color: #1c1824;
+}
+
+/* Play/pausa destacado */
+.music-btn-main {
+  border-color: #C0BC83;
+}
+
+/* Vinilo decorativo: circulo negro con surcos concentricos (radial-gradient
+   CSS), etiqueta central accent y agujero. CSS puro, sin imagenes.
+   OJO: el box-shadow inset multi-capa dibuja rectangulos en GTK (no anillos),
+   por eso los surcos van en el gradiente. */
+.music-vinyl {
+  min-width: 150px;
+  min-height: 150px;
+  border-radius: 50%;
+  background-color: #161616;
+  background-image: radial-gradient(circle, #161616 0%, #161616 15%, #1f1f1f 15%, #1f1f1f 22%, #161616 22%, #161616 30%, #1f1f1f 30%, #1f1f1f 37%, #161616 37%, #161616 45%, #1f1f1f 45%, #1f1f1f 52%, #161616 52%, #161616 60%, #1f1f1f 60%, #1f1f1f 67%, #161616 67%, #161616 75%, #1f1f1f 75%, #1f1f1f 82%, #161616 82%, #161616 100%);
+}
+
+.music-vinyl-label {
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  background-color: #C0BC83;
+}
+
+.music-vinyl-hole {
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 50%;
+  background-color: #0d0d0d;
+}
+
+.music-overlay {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}

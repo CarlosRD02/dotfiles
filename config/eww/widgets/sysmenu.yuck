@@ -1,0 +1,224 @@
+(defwidget sysmenu-widget []
+  (box :class "sysmenu sysmenu-main"
+       :orientation "v"
+       :spacing 4
+       :space-evenly false
+       :halign "start"
+       :valign "start"
+
+    ;; --- Header ---
+    (box :class "sysmenu-header"
+         :orientation "h"
+         :spacing 4
+         :space-evenly false
+      (label :class "sysmenu-avatar"
+             :halign "start"
+             :valign "center"
+             :markup "<span font='FontAwesome'>&#xF007;</span>")
+      (box :orientation "v"
+           :spacing 0
+           :halign "start"
+           :valign "center"
+           :hexpand true
+           :style "margin-left: 5px;"
+        (label :class "sysmenu-user"
+               :halign "start"
+               :text {sys-user})
+        (label :class "sysmenu-uptime"
+               :halign "start"
+               :text {"Uptime: " + sys-uptime}))
+      (button :class "sysmenu-pwr-item"
+              :halign "center"
+           :valign "center"
+               :onclick "eww close sysmenu; eww open sysmenu-overlay; eww open sysmenu-power"
+        (label :markup "<span font='FontAwesome'>&#xF011;</span>")))
+    ;; --- Temperaturas del sistema ---
+    (button :class "sysmenu-row sysmenu-temps"
+      (box :orientation "v"
+           :spacing 4
+           :halign "start"
+           :valign "center"
+        (box :spacing 8
+          (label :class "sysmenu-icon" :markup "<span font='FontAwesome'>&#xF2DB;</span>")
+          (label :class "sysmenu-val" :text {sys-temp-cpu} :halign "start"))
+        (box :spacing 8
+          (label :class "sysmenu-icon" :markup "<span font='FontAwesome'>&#xF2C9;</span>")
+          (label :class "sysmenu-val" :text {sys-temp-sys} :halign "start"))))
+
+    ;; --- Energía del CPU (governor) y Red/Bluetooth ---
+    (box :spacing 8
+         :space-evenly false
+         :halign "start"
+      (box :class "sysmenu-cpu-gov"
+           :orientation "h"
+           :spacing 8
+           :halign "start"
+           :valign "center"
+      (box :class {"cpu-gov-btn" + (sys-cpu-governor == "performance" ? " cpu-gov-active" : "")}
+           :halign "center"
+           :valign "center"
+        (button :class "cpu-gov-hitbox"
+                :halign "fill"
+                :valign "fill"
+                :onclick "bash ~/.config/eww/scripts/sys-cpugovernor.sh set performance"
+          (label :class "cpu-gov-glyph" :markup "<span font='FontAwesome'>&#xF0E7;</span>"
+                 :xalign "0.5"
+                 :yalign "0.5")))
+      (box :class {"cpu-gov-btn" + (sys-cpu-governor == "schedutil" ? " cpu-gov-active" : "")}
+           :halign "center"
+           :valign "center"
+        (button :class "cpu-gov-hitbox"
+                :halign "fill"
+                :valign "fill"
+                :onclick "bash ~/.config/eww/scripts/sys-cpugovernor.sh set schedutil"
+          (label :class "cpu-gov-glyph" :markup "<span font='FontAwesome'>&#xF06C;</span>"
+                 :xalign "0.5"
+                 :yalign "0.5")))
+      (box :class "cpu-gov-btn"
+           :halign "center"
+           :valign "center"
+        (button :class "cpu-gov-hitbox"
+                :halign "fill"
+                :valign "fill"
+          (label :class "cpu-gov-glyph" :markup "<span font='FontAwesome'>&#xF24E;</span>"
+                 :xalign "0.5"
+                 :yalign "0.5"))))
+
+      (box :class "sysmenu-net"
+           :orientation "h"
+           :halign "start"
+           :valign "center"
+        (box :orientation "h"
+             :spacing 8
+             :halign "start"
+          (box :class {"cpu-gov-btn" + (sys-net-type != "none" ? " cpu-gov-active" : "")}
+               :halign "center"
+               :valign "center"
+            (button :class "cpu-gov-hitbox"
+                    :halign "fill"
+                    :valign "fill"
+                    :onclick "bash ~/.config/eww/scripts/sys-net.sh open"
+              (label :class "cpu-gov-glyph"
+                     :markup {"<span font='FontAwesome'>" + (sys-net-type == "ethernet" ? "&#xF1E6;" : "&#xF1EB;") + "</span>"}
+                     :xalign "0.5"
+                     :yalign "0.5")))
+          (box :class "cpu-gov-btn"
+               :halign "center"
+               :valign "center"
+            (button :class "cpu-gov-hitbox"
+                    :halign "fill"
+                    :valign "fill"
+               (label :class "cpu-gov-glyph" :markup "<span font='FontAwesome'>&#xF293;</span>"
+                      :xalign "0.5"
+                      :yalign "0.5"))))))
+
+    ;; --- Brillo y Volumen ---
+    (box :class "sysmenu-sliders"
+         :orientation "v"
+         :spacing 8
+         :hexpand true
+      (box :orientation "h"
+           :spacing 8
+           :space-evenly false
+           :halign "fill"
+           :valign "center"
+        (label :class "sysmenu-slider-label"
+               :markup "<span font='FontAwesome'>&#xF185;</span>")
+        (scale :class "sysmenu-slider"
+               :orientation "h"
+               :min 0
+               :max 100
+               :value {sys-brightness}
+               :hexpand true))
+      (box :orientation "h"
+           :spacing 8
+           :space-evenly false
+           :halign "fill"
+           :valign "center"
+        (label :class "sysmenu-slider-label"
+               :markup "<span font='FontAwesome'>&#xF028;</span>")
+        (scale :class "sysmenu-slider"
+               :orientation "h"
+               :min 0
+               :max 100
+               :value {sys-volume}
+               :hexpand true
+               :onchange "bash ~/.config/eww/scripts/sys-volume.sh set {}")))
+
+    ;; --- Ajustes y Wallpaper ---
+    (box :class "sysmenu-header-panel"
+         :orientation "h"
+         :spacing 8
+         :space-evenly false
+         :hexpand true
+      (button :class "sysmenu-square-btn"
+              :hexpand true
+              :onclick "bash ~/.config/eww/scripts/sysmenu-action.sh settings"
+        (label :class "sysmenu-square-glyph"
+               :markup "<span font='FontAwesome'>&#xF013;</span>"))
+      (button :class "sysmenu-square-btn"
+              :hexpand true
+              :onclick "bash ~/.config/eww/scripts/sysmenu-action.sh wallpaper"
+        (label :class "sysmenu-square-glyph"
+               :markup "<span font='FontAwesome'>&#xF03E;</span>"))
+      (button :class "sysmenu-square-btn"
+              :hexpand true
+        (label :class "sysmenu-square-glyph"
+               :markup "<span font='FontAwesome'>&#xF141;</span>")))))
+
+;; Popup de energía: se abre desde el botón de apagar del header
+(defwidget sysmenu-power-widget []
+  (box :class "sysmenu sysmenu-power"
+       :orientation "v"
+       :spacing 8
+    (box :orientation "h"
+         :spacing 8
+         :space-evenly true
+      (button :class "sysmenu-pwr-grid"
+              :onclick "bash ~/.config/eww/scripts/sysmenu-action.sh lock"
+        (box :orientation "v"
+             :spacing 2
+          (label :class "sysmenu-power-glyph" :markup "<span font='FontAwesome'>&#xF023;</span>")
+          (label :class "sysmenu-power-text" :text "Bloquear")))
+      (button :class "sysmenu-pwr-grid"
+              :onclick "bash ~/.config/eww/scripts/sysmenu-action.sh logout"
+        (box :orientation "v"
+             :spacing 2
+          (label :class "sysmenu-power-glyph" :markup "<span font='FontAwesome'>&#xF08B;</span>")
+          (label :class "sysmenu-power-text" :text "Salir")))
+      (button :class "sysmenu-pwr-grid"
+              :onclick "bash ~/.config/eww/scripts/sysmenu-action.sh suspend"
+        (box :orientation "v"
+             :spacing 2
+          (label :class "sysmenu-power-glyph" :markup "<span font='FontAwesome'>&#xF186;</span>")
+          (label :class "sysmenu-power-text" :text "Suspender"))))
+
+    (box :orientation "h"
+         :spacing 8
+         :space-evenly true
+      (button :class "sysmenu-pwr-grid"
+              :onclick "bash ~/.config/eww/scripts/sysmenu-action.sh reboot"
+        (box :orientation "v"
+             :spacing 2
+          (label :class "sysmenu-power-glyph" :markup "<span font='FontAwesome'>&#xF021;</span>")
+          (label :class "sysmenu-power-text" :text "Reiniciar")))
+      (button :class "sysmenu-pwr-grid sysmenu-danger"
+              :onclick "bash ~/.config/eww/scripts/sysmenu-action.sh shutdown"
+        (box :orientation "v"
+             :spacing 2
+          (label :class "sysmenu-power-glyph" :markup "<span font='FontAwesome'>&#xF011;</span>")
+          (label :class "sysmenu-power-text" :text "Apagar"))))))
+
+;; Overlay transparente que captura el click fuera del menú y lo cierra
+;; (eww 0.6 no tiene evento nativo de focus-out; esta es la técnica estándar).
+(defwidget sysmenu-overlay-widget []
+  (box :class "sysmenu-overlay"
+       :orientation "v"
+       :hexpand true
+       :vexpand true
+    (button :class "sysmenu-overlay"
+            :onclick "eww close sysmenu; eww close sysmenu-power; eww close sysmenu-overlay"
+            :halign "fill"
+            :valign "fill"
+            :hexpand true
+            :vexpand true)))

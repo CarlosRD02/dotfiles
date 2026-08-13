@@ -1,0 +1,176 @@
+(include "./widgets/center.yuck")
+(include "./widgets/music.yuck")
+(include "./widgets/right.yuck")
+(include "./widgets/sysmenu.yuck")
+(include "./widgets/workspaces.yuck")
+
+(deflisten workspaces :initial "[]"
+  `bash ~/.config/eww/scripts/workspaces.sh`)
+
+(deflisten focused :initial ""
+  `bash ~/.config/eww/scripts/focused.sh`)
+
+(deflisten memory :initial "0%"
+  `bash ~/.config/eww/scripts/memory.sh`)
+
+(deflisten cpu :initial "0%"
+  `bash ~/.config/eww/scripts/cpu.sh`)
+
+(deflisten vol :initial "100%"
+  `bash ~/.config/eww/scripts/vol.sh`)
+
+(deflisten clock :initial "00:00"
+  `bash ~/.config/eww/scripts/clock.sh`)
+
+(deflisten net :initial "off"
+  `bash ~/.config/eww/scripts/network.sh`)
+
+(deflisten sys-vol :initial "50"
+  `bash ~/.config/eww/scripts/sys-vol.sh`)
+
+(deflisten sys-net :initial "Desconectado"
+  `bash ~/.config/eww/scripts/sys-net.sh`)
+
+(deflisten sys-temp-cpu :initial "--°C"
+  `bash ~/.config/eww/scripts/sys-temps.sh cpu`)
+
+(deflisten sys-temp-sys :initial "--°C"
+  `bash ~/.config/eww/scripts/sys-temps.sh sys`)
+
+(deflisten sys-cpu-governor :initial "schedutil"
+  `bash ~/.config/eww/scripts/sys-cpugovernor.sh get`)
+
+(deflisten sys-net-type :initial "ethernet"
+  `bash ~/.config/eww/scripts/sys-net.sh get`)
+
+(deflisten sys-volume :initial "99"
+  `bash ~/.config/eww/scripts/sys-volume.sh get`)
+
+(deflisten sys-brightness :initial "100"
+  `bash ~/.config/eww/scripts/sys-brightness.sh get`)
+
+(deflisten music-status :initial "Stopped"
+  `bash ~/.config/eww/scripts/music.sh`)
+
+(deflisten music-title :initial ""
+  `bash ~/.config/eww/scripts/music-title.sh`)
+
+(deflisten music-time-frac :initial "0"
+  `bash ~/.config/eww/scripts/music-time.sh frac`)
+
+(deflisten music-time-elapsed :initial "00:00"
+  `bash ~/.config/eww/scripts/music-time.sh elapsed`)
+
+(deflisten music-time-total :initial "00:00"
+  `bash ~/.config/eww/scripts/music-time.sh total`)
+
+(deflisten music-volume :initial "100"
+  `bash ~/.config/eww/scripts/music-volume.sh get`)
+
+(deflisten sys-user :initial ""
+  `whoami`)
+
+(deflisten sys-uptime :initial ""
+  `bash ~/.config/eww/scripts/sys-uptime.sh`)
+
+(defwindow bar
+           :monitor 0
+           :geometry (geometry :x "0%"
+                                :y "3px"
+                                :width "100%"
+                                :height "28px"
+                                :anchor "top center")
+           :stacking "bg"
+           :windowtype "dock"
+	   :exclusive true
+           :wm-ignore false
+           :reserve (struts :side "top" :distance "28px")
+  (bar))
+
+(defwidget bar []
+  (box :class "bar"
+       :orientation "h"
+       :space-evenly false
+
+    (box :class "bar-left"
+         :hexpand true
+         :halign "start"
+         :spacing 0
+         :space-evenly false
+      (workspaces)
+      (label :class "sep"
+             :text ">")
+      (center))
+
+    (box :class "bar-center"
+         :hexpand true
+         :halign "center"
+      (button :class "module music-btn"
+              :halign "center"
+              :onclick "bash ~/.config/eww/scripts/music-toggle.sh"
+        (label :markup "<span font='FontAwesome'>&#xF001;</span>")))
+
+    (box :class "bar-right"
+         :hexpand true
+         :halign "end"
+      (right))))
+
+(defwindow sysmenu
+           :monitor 0
+           :geometry (geometry :x "0px"
+                                :y "36px"
+                                :width "300px"
+                                :height "350px"
+                                :anchor "top right")
+           :stacking "fg"
+           :windowtype "notification"
+           :wm-ignore true
+  (sysmenu-widget))
+
+(defwindow sysmenu-overlay
+           :monitor 0
+           :geometry (geometry :x "0%"
+                                :y "0%"
+                                :width "100%"
+                                :height "100%"
+                                :anchor "top center")
+           :stacking "bg"
+           :windowtype "notification"
+           :wm-ignore true
+  (sysmenu-overlay-widget))
+
+(defwindow sysmenu-power
+           :monitor 0
+           :geometry (geometry :x "0px"
+                                :y "0px"
+                                :width "300px"
+                                :height "170px"
+                                :anchor "center")
+           :stacking "fg"
+           :windowtype "notification"
+           :wm-ignore true
+  (sysmenu-power-widget))
+
+(defwindow music
+           :monitor 0
+           :geometry (geometry :x "0px"
+                               :y "36px"
+                               :width "240px"
+                               :height "150px"
+                               :anchor "top center")
+           :stacking "fg"
+           :windowtype "notification"
+           :wm-ignore true
+  (music-widget))
+
+(defwindow music-overlay
+           :monitor 0
+           :geometry (geometry :x "0%"
+                                :y "0%"
+                                :width "100%"
+                                :height "100%"
+                                :anchor "top center")
+           :stacking "bg"
+           :windowtype "notification"
+           :wm-ignore true
+  (music-overlay-widget))

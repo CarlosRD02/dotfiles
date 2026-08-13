@@ -1,0 +1,3 @@
+(defwidget center []
+  (box :class "center"
+    (label :text {focused})))
