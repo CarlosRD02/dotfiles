@@ -4,51 +4,89 @@
 
 # Terminales
 super + Return
-	alacritty
-
-ctrl + alt + t
-	alacritty
+	kitty
 
 # Rofi
-super + @space
-	rofi -show drun -config /usr/share/rofi/themes/Arc-Dark.rasi -icon-theme "Papirus-Dark" -show-icons -font "Arial 15"
+super + d
+	rofi -show drun -icon-theme "Breeze-Dark" -show-icons -font "Jet Brains Mono 13"
 
 super + shift + space
-	rofi -show run
+	rofi -show run -icon-theme "Breeze-Dark" -show-icons -font "Jet Brains Mono 13"
 
 # Lanzadores Personalizados
 
-# Pcmanfm
-super + e
-	pcmanfm
+# Controlar el volumen con Ctrl + Scroll Arriba/Abajo
+ctrl + {Up, Down}
+    playerctl volume {0.05+,0.05-}
 
-# Vscode
-super + c 
-	code
+# Canción anterior/siguiente con Ctrl + PageUp/PageDown
+ctrl + {Prior, Next}
+    playerctl {previous, next}
+
+# Reproducir/Pausar con Ctrl + End
+ctrl + End
+    playerctl play-pause
+
+# Thunar
+super + e
+	thunar
+
+# ide
+super + i 
+	
 
 # Brave
 super + n
-	brave-browser
+	firefox
 
 # Screnshot
-super + p
-	xfce4-screenshooter
+Print
+	flameshot gui
 
 # Neovim
 super + v 
-	alacritty -e nvim
+	kitty -e nvim
+
+super + x
+	~/.config/polybar/scripts/bspwm-help.sh
+	
+	
+# Cambiar al escritorio de la izquierda/derecha con Ctrl + flechas
+ctrl + alt + Left
+    bspc desktop -f prev
+
+ctrl + alt + Right
+    bspc desktop -f next
 
 # Ranger
 super + r
-	alacritty -e ranger
+	kitty  -e ranger
 
-# Kitty
-super + k
-	kitty
+# Subir volumen (Super + Page Up)
+super + Prior
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+
+# Bajar volumen (Super + Page Down)
+super + Next
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+
+# Mutear/Desmutear (Super + Insert, o la tecla que prefieras)
+super + Insert
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+super + q
+	~/.config/polybar/nord-bar/scripts/rofi-logout.sh
+
+super + z
+	~/.config/bspwm/scripts/docker.sh on
+
+super + shift + z 
+	~/.config/bspwm/scripts/docker.sh off
+
 
 #
 # bspwm hotkeys
