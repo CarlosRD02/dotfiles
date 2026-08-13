@@ -1,0 +1,28 @@
+[global]
+# Tamaño y posición de la ventana
+geometry = "500x5-30+20"
+font = "Iosevka 10" # O la fuente monoespaciada de tu preferencia
+
+# Colores para la ventana completa y las líneas separadoras
+background = "#2E3440"
+foreground = "#D8DEE9"
+frame_color = "#81A1C1" # Color del borde de la notificación
+separator_color = "#4C566A"
+
+[urgency_low]
+background = "#2E3440"
+foreground = "#D8DEE9"
+frame_color = "#8FBCBB" # Un azul verdoso para cosas poco importantes
+timeout = 5
+
+[urgency_normal]
+background = "#2E3440"
+foreground = "#E5E9F0"
+frame_color = "#88C0D0" # Azul principal para notificaciones estándar
+timeout = 8
+
+[urgency_critical]
+background = "#2E3440"
+foreground = "#ECEFF4"
+frame_color = "#BF616A" # Rojo para notificaciones críticas
+timeout = 0 # 0 significa que no desaparece hasta que se cierre manualmente
