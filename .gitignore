@@ -1,0 +1,23 @@
+# Skill registry cache (opencode)
+.atl/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Node / JS
+node_modules/
+dist/
+build/
+
+# Logs y temporales
+*.log
+*.tmp
+*.swp
+*~
+
+# Backups
+*.tar.gz
